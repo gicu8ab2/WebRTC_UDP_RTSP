@@ -12,13 +12,15 @@ streams.  To accomplish this, the following mods were made:
 
 #### Dependencies
 
-Install gstreamer 1.14+ and all the usual plugins and libs
+* rtsp-simple-server from [RTSP Simple Server](https://github.com/aler9/rtsp-simple-server) .)
 
-	sudo apt-get install -y gstreamer1.0-tools gstreamer1.0-nice gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly gstreamer1.0-plugins-good libgstreamer1.0-dev git libglib2.0-dev libgstreamer-plugins-bad1.0-dev libsoup2.4-dev libjson-glib-dev
+* gstreamer 1.14+ and all the usual plugins and libs
+
+		sudo apt-get install -y gstreamer1.0-tools gstreamer1.0-nice gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly gstreamer1.0-plugins-good libgstreamer1.0-dev git libglib2.0-dev libgstreamer-plugins-bad1.0-dev libsoup2.4-dev libjson-glib-dev
 
 #### Compile
 
-Navigate to directory containing Makefile and webrtc_to_udp.c file and run
+Navigate to this directory repo containing Makefile and webrtc_to_udp.c file and run
 
 	./make
 
@@ -27,12 +29,12 @@ Navigate to directory containing Makefile and webrtc_to_udp.c file and run
 * Pull the video from remote web browser by navigating to https://webrtc.nirbheek.in 
 at remote peer endpoint
 
-* From the other endpoint run the command below (swapping 7122 for
+* From the other endpoint run the command below (swapping XXXX for
   supplied peer-id on browser page at remote peer endpoint):
 
-		./webrtc_to_udp --peer-id=7122
+		./webrtc_to_udp --peer-id=XXXX
 		
-* Enabling camera and microphone when prompted by browser (tested in Chrome and Firefox).
+* Enable camera and microphone when prompted by browser (tested in Chrome and Firefox).
 	
 * Start RTSP server in background.  (Here, we use rtsp-simple-server from [RTSP Simple Server](https://github.com/aler9/rtsp-simple-server) .)
 
