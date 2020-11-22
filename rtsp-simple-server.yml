@@ -1,0 +1,80 @@
+
+# supported stream protocols (the handshake is always performed with TCP)
+protocols: [udp, tcp]
+# port of the TCP RTSP listener
+rtspPort: 8554
+# port of the UDP RTP listener (used only if udp is in protocols)
+rtpPort: 8000
+# port of the UDP RTCP listener (used only if udp is in protocols)
+rtcpPort: 8001
+
+# timeout of read operations
+readTimeout: 10s
+# timeout of write operations
+writeTimeout: 5s
+
+# supported authentication methods (both are insecure, use RTSP inside a VPN to enforce security)
+authMethods: [basic, digest]
+
+# command to run when a client connects.
+# this is terminated with SIGINT when a client disconnects.
+runOnConnect:
+
+# enable Prometheus-compatible metrics on port 9998
+metrics: no
+# enable pprof on port 9999 to monitor performances
+pprof: no
+# destinations of log messages; available options are 'stdout', 'file' and 'syslog'
+logDestinations: [stdout]
+# if 'file' is in logDestinations, this is the file that will receive the logs
+logFile: rtsp-simple-server.log
+
+# these settings are path-dependent. The settings under the path 'all' are
+# applied to all paths that do not match a specific entry.
+paths:
+  all:
+    # source of the stream - this can be:
+    # * record -> the stream is provided by a client through the RECORD command (like ffmpeg)
+    # * rtsp://original-url -> the stream is pulled from another RTSP server
+    source: record
+    # if the source is an RTSP url, this is the protocol that will be used to pull the stream
+    sourceProtocol: udp
+    # if the source is an RTSP url, it will be pulled only when at least one reader
+    # is connected, saving bandwidth
+    sourceOnDemand: no
+
+    # command to run when this path is loaded by the program.
+    # this can be used, for example, to publish a stream and keep it always opened.
+    # This is terminated with SIGINT when the program closes.
+    # The path name is available in the RTSP_SERVER_PATH variable
+    runOnInit:
+
+    # command to run when this path is requested.
+    # This can be used, for example, to publish a stream on demand.
+    # This is terminated with SIGINT when the path is not requested anymore.
+    # The path name is available in the RTSP_SERVER_PATH variable
+    runOnDemand:
+
+    # command to run when a client starts publishing.
+    # This is terminated with SIGINT when a client stops publishing.
+    # The path name is available in the RTSP_SERVER_PATH variable
+    runOnPublish:
+
+    # command to run when a clients starts reading.
+    # This is terminated with SIGINT when a client stops reading.
+    # The path name is available in the RTSP_SERVER_PATH variable
+    runOnRead:
+
+    # username required to publish
+    publishUser:
+    # password required to publish
+    publishPass:
+    # IPs or networks (x.x.x.x/24) allowed to publish
+    publishIps: []
+
+    # username required to read
+    readUser:
+    # password required to read
+    readPass:
+    # IPs or networks (x.x.x.x/24) allowed to read
+    readIps: []
