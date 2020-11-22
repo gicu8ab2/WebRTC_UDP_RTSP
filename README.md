@@ -12,7 +12,8 @@ streams.  To accomplish this, the following mods were made:
 
 #### Dependencies
 
-* rtsp-simple-server from [RTSP Simple Server](https://github.com/aler9/rtsp-simple-server) .)
+* rtsp-simple-server from [RTSP Simple
+  Server](https://github.com/aler9/rtsp-simple-server) .
 
 * gstreamer 1.14+ and all the usual plugins and libs
 
